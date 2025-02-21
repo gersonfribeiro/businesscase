@@ -2,6 +2,7 @@ package com.businesscase.software_engineering.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDate;
@@ -11,6 +12,7 @@ import java.util.Date;
 @Getter
 @Setter
 @AllArgsConstructor // será utilizado no RowMapper
+@NoArgsConstructor // usado para a paginação
 public class Tasks {
     private int id_task;
     private String title_task;
@@ -20,8 +22,7 @@ public class Tasks {
     private Date data_modificacao_task;
 
     // Constructor para post
-    public Tasks(int id_task, String title_task, String description_task, Status_tasks status_task) {
-        this.id_task = id_task;
+    public Tasks(String title_task, String description_task, Status_tasks status_task) {
         this.title_task = title_task;
         this.description_task = description_task;
         this.status_task = status_task;

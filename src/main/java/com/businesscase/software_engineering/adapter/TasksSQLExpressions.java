@@ -25,20 +25,6 @@ public class TasksSQLExpressions {
                 """;
     }
 
-    public static String sqlFindById() {
-        return """
-                    SELECT
-                        tasks.id_task,
-                        tasks.title_task,
-                        tasks.description_task,
-                        tasks.status_task,
-                        tasks.data_task,
-                        tasks.data_modificacao_task
-                    FROM tasks
-                    WHERE tasks.id_task = :id_task
-                """;
-    }
-
     public static String sqlFindByAllArgs(String parametro) {
 
         return """
@@ -56,6 +42,20 @@ public class TasksSQLExpressions {
                 OR tasks.status_task LIKE""" + " '%" + parametro + "%'" + """
                 OR tasks.data_task LIKE""" + " '%" + parametro + "%'" + """
                 OR tasks.data_modificacao_task LIKE""" + " '%" + parametro + "%';" + """
+                """;
+    }
+
+    public static String sqlFindById() {
+        return """
+                    SELECT
+                        tasks.id_task,
+                        tasks.title_task,
+                        tasks.description_task,
+                        tasks.status_task,
+                        tasks.data_task,
+                        tasks.data_modificacao_task
+                    FROM tasks
+                    WHERE tasks.id_task = :id_task
                 """;
     }
 
