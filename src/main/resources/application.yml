@@ -1,0 +1,20 @@
+spring:
+  application:
+    name: businessCase
+  main:
+    web-application-type: servlet
+  web:
+    resources:
+      add-mappings: false
+  datasource:
+    name: ${DOTENV_NAME}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: ${DOTENV_URL}
+    username: ${DOTENV_USERNAME}
+    password: ${DOTENV_PASSWORD}
+  servlet:
+    multipart:
+      max-file-size: 1000MB
+      max-request-size: 1000MB
+server:
+  port: 8080

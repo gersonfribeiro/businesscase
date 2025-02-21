@@ -5,8 +5,7 @@ import com.businesscase.software_engineering.application.tasks.dtos.TasksUpdateC
 import com.businesscase.software_engineering.domain.Tasks;
 import com.businesscase.software_engineering.headerPaginator.HeaderPaginator;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -20,27 +19,33 @@ public class TasksController {
         this.tasksHandler = tasksHandler;
     }
 
-    public ResponseEntity<HeaderPaginator<Tasks>> tasksPaginadas(int limite, int paginaAtual, String ordenacao) {
+    @GetMapping
+    public ResponseEntity<HeaderPaginator<Tasks>> tasksPaginadas(@RequestParam int limite,@RequestParam int paginaAtual,@RequestParam String ordenacao) {
         return tasksHandler.tasksPaginadas(limite, paginaAtual, ordenacao);
     }
 
-    public List<Tasks> buscarTasks(String parametro){
+    @GetMapping("/find")
+    public ResponseEntity<List<Tasks>> buscarTasks(@RequestParam String parametro){
         return tasksHandler.buscarTasks(parametro);
     }
 
-    public Tasks findTaskById(int id_task){
+    @GetMapping("/find/{id_task}")
+    public ResponseEntity<Tasks> findTaskById(@PathVariable int id_task){
         return tasksHandler.findTaskById(id_task);
     }
 
-    public Boolean inserirTask(TasksCreateCommand task){
+    @PostMapping
+    public ResponseEntity<Tasks> inserirTask(@RequestBody TasksCreateCommand task){
         return tasksHandler.inserirTask(task);
     }
 
-    public Boolean modificarTask(TasksUpdateCommand task, int id_task){
+    @PutMapping("/update/{id_task}")
+    public ResponseEntity<Tasks> modificarTask(@RequestBody TasksUpdateCommand task,@PathVariable int id_task){
         return tasksHandler.modificarTask(task, id_task);
     }
 
-    public Boolean deletarTask(int id_task){
+    @DeleteMapping("/delete/{id_task}")
+    public String deletarTask(@PathVariable int id_task){
         return tasksHandler.deletarTask(id_task);
     }
 }

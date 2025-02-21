@@ -2,6 +2,9 @@ package com.businesscase.software_engineering.application.tasks;
 
 import com.businesscase.software_engineering.application.tasks.dtos.TasksCreateCommand;
 import com.businesscase.software_engineering.application.tasks.dtos.TasksUpdateCommand;
+import com.businesscase.software_engineering.application.tasks.exceptions.TaskNotFound;
+import com.businesscase.software_engineering.application.tasks.exceptions.TaskNotFoundByParam;
+import com.businesscase.software_engineering.application.tasks.exceptions.TasksErrorOnDelete;
 import com.businesscase.software_engineering.domain.Tasks;
 import com.businesscase.software_engineering.domain.TasksRepository;
 import com.businesscase.software_engineering.headerPaginator.HeaderPaginator;
@@ -23,22 +26,37 @@ public class TasksService {
     }
 
     public List<Tasks> buscarTasks(String parametro){
-        return tasksRepository.buscarTasks(parametro);
+        List<Tasks> registros = tasksRepository.buscarTasks(parametro);
+        if (registros.isEmpty())
+            throw new TaskNotFoundByParam(parametro);
+        return registros;
     }
 
     public Tasks findTaskById(int id_task){
-        return tasksRepository.findTaskById(id_task);
+        Tasks task = tasksRepository.findTaskById(id_task);
+        if (task == null)
+            throw new TaskNotFound(id_task);
+        return task;
     }
 
-    public Boolean inserirTask(TasksCreateCommand task){
-        return tasksRepository.inserirTask(task.toTask());
+    public Tasks inserirTask(TasksCreateCommand task){
+        Tasks taskDomain = task.toTask();
+        tasksRepository.inserirTask(taskDomain);
+        return findTaskById(taskDomain.getId_task());
     }
 
-    public Boolean modificarTask(TasksUpdateCommand task, int id_task){
-        return tasksRepository.modificarTask(task.toTask(id_task), id_task);
+    public Tasks modificarTask(TasksUpdateCommand task, int id_task){
+        findTaskById(id_task);
+        Tasks taskUpdate = task.toTask(id_task);
+        tasksRepository.modificarTask(taskUpdate, id_task);
+        return taskUpdate;
     }
 
-    public Boolean deletarTask(int id_task){
-        return tasksRepository.deletarTask(id_task);
+    public String deletarTask(int id_task){
+        findTaskById(id_task);
+        Boolean resultOperation = tasksRepository.deletarTask(id_task);
+        if (!resultOperation)
+            throw new TasksErrorOnDelete(id_task);
+        return "Task removida com sucesso!";
     }
 }

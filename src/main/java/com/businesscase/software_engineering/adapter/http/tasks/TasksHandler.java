@@ -20,27 +20,26 @@ public class TasksHandler {
     }
 
     public ResponseEntity<HeaderPaginator<Tasks>> tasksPaginadas(int limite, int paginaAtual, String ordenacao) {
-        HeaderPaginator<Tasks> registros = tasksService.tasksPaginadas(limite, paginaAtual, ordenacao);
-        return ResponseEntity.ok(registros);
+        return ResponseEntity.ok(tasksService.tasksPaginadas(limite, paginaAtual, ordenacao));
     }
 
-    public List<Tasks> buscarTasks(String parametro){
-        return tasksService.buscarTasks(parametro);
+    public ResponseEntity<List<Tasks>> buscarTasks(String parametro){
+        return ResponseEntity.ok(tasksService.buscarTasks(parametro));
     }
 
-    public Tasks findTaskById(int id_task){
-        return tasksService.findTaskById(id_task);
+    public ResponseEntity<Tasks> findTaskById(int id_task){
+        return ResponseEntity.ok(tasksService.findTaskById(id_task));
     }
 
-    public Boolean inserirTask(TasksCreateCommand task){
-        return tasksService.inserirTask(task);
+    public ResponseEntity<Tasks> inserirTask(TasksCreateCommand task){
+        return ResponseEntity.ok(tasksService.inserirTask(task));
     }
 
-    public Boolean modificarTask(TasksUpdateCommand task, int id_task){
-        return tasksService.modificarTask(task, id_task);
+    public ResponseEntity<Tasks> modificarTask(TasksUpdateCommand task, int id_task){
+        return ResponseEntity.ok(tasksService.modificarTask(task, id_task));
     }
 
-    public Boolean deletarTask(int id_task){
+    public String deletarTask(int id_task){
         return tasksService.deletarTask(id_task);
     }
 }

@@ -1,5 +1,6 @@
 package com.businesscase.software_engineering.adapter.http.exception_handlers;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -8,7 +9,6 @@ import lombok.Setter;
 
 @Getter
 @Setter
-@AllArgsConstructor
 @NoArgsConstructor
 public class ErrorResponse {
 
@@ -17,6 +17,10 @@ public class ErrorResponse {
 
     @JsonProperty("id_task")
     private int id_task;
+
+    @JsonProperty("parametro")
+    @JsonIgnore
+    private String parametro;
 
     @JsonProperty("status")
     private int status;
