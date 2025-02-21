@@ -1,4 +1,4 @@
-package com.businesscase.software_engineering.adapter;
+package com.businesscase.software_engineering.adapter.crud_operations;
 
 public class TasksSQLExpressions {
     public static String sqlFindAll(String ordenacao) {

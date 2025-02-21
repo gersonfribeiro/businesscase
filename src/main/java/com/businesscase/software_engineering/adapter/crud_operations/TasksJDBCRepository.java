@@ -1,4 +1,4 @@
-package com.businesscase.software_engineering.adapter;
+package com.businesscase.software_engineering.adapter.crud_operations;
 
 import com.businesscase.software_engineering.domain.Status_tasks;
 import com.businesscase.software_engineering.domain.Tasks;
@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import static com.businesscase.software_engineering.adapter.TasksSQLExpressions.*;
+import static com.businesscase.software_engineering.adapter.crud_operations.TasksSQLExpressions.*;
 
 @Repository
 public class TasksJDBCRepository implements TasksRepository {
