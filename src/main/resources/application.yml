@@ -7,11 +7,11 @@ spring:
     resources:
       add-mappings: false
   datasource:
-    name: ${DOTENV_NAME}
+    name: tasks_s_e
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: ${DOTENV_URL}
-    username: ${DOTENV_USERNAME}
-    password: ${DOTENV_PASSWORD}
+    url: jdbc:mysql://localhost:3306/tasks_s_e
+    username: root
+    password: Gersin4282
   servlet:
     multipart:
       max-file-size: 1000MB

@@ -21,6 +21,10 @@ public class TasksService {
         this.tasksRepository = tasksRepository;
     }
 
+    public int proximoIdTask() {
+        return tasksRepository.proximoIdTask();
+    }
+
     public HeaderPaginator<Tasks> tasksPaginadas(int limite, int paginaAtual, String ordenacao) {
         return tasksRepository.tasksPaginadas(limite, paginaAtual, ordenacao);
     }
@@ -42,12 +46,13 @@ public class TasksService {
     public Tasks inserirTask(TasksCreateCommand task){
         Tasks taskDomain = task.toTask();
         tasksRepository.inserirTask(taskDomain);
-        return findTaskById(taskDomain.getId_task());
+        return findTaskById(proximoIdTask());
     }
 
     public Tasks modificarTask(TasksUpdateCommand task, int id_task){
-        findTaskById(id_task);
+        Tasks taskdomain = findTaskById(id_task);
         Tasks taskUpdate = task.toTask(id_task);
+        taskUpdate.setData_task(taskdomain.getData_task());
         tasksRepository.modificarTask(taskUpdate, id_task);
         return taskUpdate;
     }

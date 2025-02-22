@@ -19,8 +19,12 @@ public class TasksController {
         this.tasksHandler = tasksHandler;
     }
 
-    @GetMapping
-    public ResponseEntity<HeaderPaginator<Tasks>> tasksPaginadas(@RequestParam int limite,@RequestParam int paginaAtual,@RequestParam String ordenacao) {
+    @GetMapping()
+    public ResponseEntity<HeaderPaginator<Tasks>> tasksPaginadas(
+            @RequestParam(defaultValue = "25") int limite,
+            @RequestParam(defaultValue = "1") int paginaAtual,
+            @RequestParam(defaultValue = "ASC") String ordenacao
+    ) {
         return tasksHandler.tasksPaginadas(limite, paginaAtual, ordenacao);
     }
 
@@ -34,13 +38,16 @@ public class TasksController {
         return tasksHandler.findTaskById(id_task);
     }
 
-    @PostMapping
+    @PostMapping()
     public ResponseEntity<Tasks> inserirTask(@RequestBody TasksCreateCommand task){
         return tasksHandler.inserirTask(task);
     }
 
     @PutMapping("/update/{id_task}")
-    public ResponseEntity<Tasks> modificarTask(@RequestBody TasksUpdateCommand task,@PathVariable int id_task){
+    public ResponseEntity<Tasks> modificarTask(
+            @RequestBody TasksUpdateCommand task,
+            @PathVariable int id_task
+    ){
         return tasksHandler.modificarTask(task, id_task);
     }
 

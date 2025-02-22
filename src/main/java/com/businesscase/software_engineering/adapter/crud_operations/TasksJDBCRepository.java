@@ -121,4 +121,13 @@ public class TasksJDBCRepository implements TasksRepository {
         MapSqlParameterSource parameterSource = new MapSqlParameterSource("id_task", id_task);
         return jdbcTemplate.update(sqlDeleteTask(), parameterSource) > 0;
     }
+
+    @Override
+    public int proximoIdTask() {
+        return jdbcTemplate.queryForObject(
+                sqlProximoIdTask(),
+                new MapSqlParameterSource(),
+                Integer.class
+        );
+    }
 }

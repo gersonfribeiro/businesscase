@@ -95,13 +95,13 @@ public class TasksSQLExpressions {
     public static String sqlDeleteTask() {
 
         return """
-                INSERT INTO tasks (
-                    tasks.id_task,
-                    tasks.title_task,
-                    tasks.description_task,
-                    tasks.status_task,
-                    tasks.data_task
-                WHERE tasks.id_task = :id_task
+                    DELETE FROM tasks WHERE tasks.id_task = :id_task
+                """;
+    }
+
+    public static String sqlProximoIdTask() {
+        return """
+                    SELECT tasks.id_task FROM tasks_s_e.tasks order by tasks.id_task DESC LIMIT 1;
                 """;
     }
 }
