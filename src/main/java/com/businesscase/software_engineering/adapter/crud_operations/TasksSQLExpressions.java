@@ -101,7 +101,7 @@ public class TasksSQLExpressions {
 
     public static String sqlProximoIdTask() {
         return """
-                    SELECT tasks.id_task FROM tasks_s_e.tasks order by tasks.id_task DESC LIMIT 1;
+                    SELECT tasks.id_task FROM tasks order by tasks.id_task DESC LIMIT 1;
                 """;
     }
 }
