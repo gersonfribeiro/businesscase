@@ -1,5 +1,6 @@
 package com.businesscase.software_engineering.domain;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.time.LocalDate;
@@ -20,13 +21,22 @@ public class Tasks {
     private Status_tasks status_task;
 
     @JsonProperty("data_task")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private Date data_task;
 
     @JsonProperty("data_modificacao_task")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private Date data_modificacao_task;
 
 
-    public Tasks(int id_task, String title_task, String description_task, Status_tasks status_task, Date data_task, Date data_modificacao_task) {
+    public Tasks(
+            int id_task,
+            String title_task,
+            String description_task,
+            Status_tasks status_task,
+            Date data_task,
+            Date data_modificacao_task
+    ) {
         this.id_task = id_task;
         this.title_task = title_task;
         this.description_task = description_task;
@@ -36,7 +46,10 @@ public class Tasks {
     }
 
     // Constructor para post
-    public Tasks(String title_task, String description_task) {
+    public Tasks(
+            String title_task,
+            String description_task
+    ) {
         this.title_task = title_task;
         this.description_task = description_task;
         this.status_task = Status_tasks.PENDING;
@@ -46,7 +59,13 @@ public class Tasks {
     }
 
     // Constructor para put
-    public Tasks(int id_task, String title_task, String description_task, Status_tasks status_task, Date data_task) {
+    public Tasks(
+            int id_task,
+            String title_task,
+            String description_task,
+            Status_tasks status_task,
+            Date data_task
+    ) {
         this.id_task = id_task;
         this.title_task = title_task;
         this.description_task = description_task;
@@ -69,24 +88,12 @@ public class Tasks {
         return title_task;
     }
 
-    public void setTitle_task(String title_task) {
-        this.title_task = title_task;
-    }
-
     public String getDescription_task() {
         return description_task;
     }
 
-    public void setDescription_task(String description_task) {
-        this.description_task = description_task;
-    }
-
     public Status_tasks getStatus_task() {
         return status_task;
-    }
-
-    public void setStatus_task(Status_tasks status_task) {
-        this.status_task = status_task;
     }
 
     public Date getData_task() {
@@ -99,9 +106,5 @@ public class Tasks {
 
     public Date getData_modificacao_task() {
         return data_modificacao_task;
-    }
-
-    public void setData_modificacao_task(Date data_modificacao_task) {
-        this.data_modificacao_task = data_modificacao_task;
     }
 }

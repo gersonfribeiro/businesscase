@@ -1,6 +1,5 @@
 package com.businesscase.software_engineering.application.tasks.dtos;
 
-import com.businesscase.software_engineering.domain.Status_tasks;
 import com.businesscase.software_engineering.domain.Tasks;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -15,7 +14,7 @@ public class TasksCreateCommand {
         return new Tasks(title_task, description_task);
     }
 
-    public TasksCreateCommand(String title_task, String description_task, Status_tasks status_task) {
+    public TasksCreateCommand(String title_task, String description_task) {
         this.title_task = title_task;
         this.description_task = description_task;
     }
